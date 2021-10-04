@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ActionResultsDemo.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -37,6 +38,47 @@ namespace ActionResultsDemo.Controllers
         public RedirectResult GoToUrl()
         {
             return Redirect("http://www.google.com");
+        }
+
+        public RedirectToRouteResult GoToIndexAction()
+        {
+            return RedirectToAction("Index");
+        }
+
+        public RedirectToRouteResult GotoContactAction()
+        {
+            return RedirectToAction("Contact", "Home");
+        }
+
+        public RedirectToRouteResult GoToAspecificRoute()
+        {
+            return RedirectToRoute("AboutUs");
+        }
+
+        public FileResult ShowCSSContent()
+        {
+            return File(Server.MapPath("~/Content/Site.css"), "text/css");
+        }
+
+        public FileResult GetImage()
+        {
+            return File(Server.MapPath("~/Images/beach.jpg"), "images/jpg");
+        }
+
+        public JsonResult ShowNewCustomer()
+        {
+            Customer customer = new Customer()
+            {
+                ID = 101,
+                FullName = "Nikolas Bekas"
+            };
+
+            return Json(customer, JsonRequestBehavior.AllowGet);
+        }
+
+        public PartialViewResult ShowChildViewResult()
+        {
+            return PartialView();
         }
     }
 }
